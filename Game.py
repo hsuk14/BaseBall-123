@@ -14,20 +14,28 @@ class Game:
     def is_correct(self, param):
         return self.question == param
 
+    def is_strike(self, position, input_num):
+        return position == self.question.find(input_num)
+
+    def is_ball(self, input_num):
+        if self.question.find(input_num) != -1:
+            return True
+        return False
+
     def guess(self, param: str):
         self.validation_of_arg(param)
+        length = self.get_length_of_question()
         if self.is_correct(param):
-            return GameResult(True, 3, 0)
+            return GameResult(True, length, 0)
 
         strike = 0
         ball = 0
-        for i in range(len(self.question)):
-            for j in range(len(self.question)):
-                if self.question[i] == param[j]:
-                    if i == j:
-                        strike += 1
-                    else:
-                        ball += 1
+        length = self.get_length_of_question()
+        for i in range(length):
+            if self.is_strike(i, param[i]):
+                strike += 1
+            elif self.is_ball(param[i]):
+                ball += 1
 
         return GameResult(False, strike, ball)
 
