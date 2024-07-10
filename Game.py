@@ -5,5 +5,5 @@ class Game:
     def validation_of_arg(self, param):
         if param == None:
             raise ValueError("Arg must be List")
-        if len(param) != 3:
+        if len(param) != 3 or not param.isdigit():
             raise ValueError("Arg must be 3 digits")
