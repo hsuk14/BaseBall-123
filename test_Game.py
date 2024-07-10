@@ -22,11 +22,12 @@ class TestGame(TestCase):
         self.assert_illegal_arg("abc", "Arg must be 3 different digits")
         self.assert_illegal_arg("121", "Arg must be 3 different digits")
 
-    def test_return_solve_result_if_correct(self):
-        self.sut.question = "123"
+    def test_return_solved_result_if_correct(self):
+        self.sut.set_question("123")
         result: GameResult = self.sut.guess("123")
 
         self.assertIsNotNone(result)
-        self.assertTrue(result.solved)
-        self.assertEqual(3, result.strike)
-        self.assertEqual(0, result.ball)
+        self.assertTrue(result.get_solved())
+        self.assertEqual(3, result.get_strike())
+        self.assertEqual(0, result.get_ball())
+
