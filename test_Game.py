@@ -31,3 +31,11 @@ class TestGame(TestCase):
         self.assertEqual(3, result.get_strike())
         self.assertEqual(0, result.get_ball())
 
+    def test_return_unsolved_result_if_all_incorrect(self):
+        self.sut.set_question("123")
+        result: GameResult = self.sut.guess("456")
+
+        self.assertIsNotNone(result)
+        self.assertFalse(result.get_solved())
+        self.assertEqual(0, result.get_strike())
+        self.assertEqual(0, result.get_ball())

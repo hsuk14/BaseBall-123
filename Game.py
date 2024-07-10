@@ -10,7 +10,19 @@ class Game:
 
     def guess(self, param: str):
         self.validation_of_arg(param)
-        return GameResult(True, 3, 0)
+        strike = 0
+        ball = 0
+        solved = False
+        for i in range(3):
+            for j in range(3):
+                if self.question[i] == param[j]:
+                    if i == j:
+                        strike += 1
+                    else:
+                        ball += 1
+        if strike == 3:
+            solved = True
+        return GameResult(solved, strike, ball)
 
     def validation_of_arg(self, param):
         if param == None:
