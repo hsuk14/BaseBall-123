@@ -58,3 +58,12 @@ class TestGame(TestCase):
         self.assertFalse(result.get_solved())
         self.assertEqual(0, result.get_strike())
         self.assertEqual(3, result.get_ball())
+
+    def test_return_proper_value_if_4_digit(self):
+        self.sut.set_question("1234")
+        result: GameResult = self.sut.guess("3124")
+
+        self.assertIsNotNone(result)
+        self.assertFalse(result.get_solved())
+        self.assertEqual(1, result.get_strike())
+        self.assertEqual(3, result.get_ball())
