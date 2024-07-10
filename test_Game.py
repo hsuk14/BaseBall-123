@@ -49,3 +49,12 @@ class TestGame(TestCase):
         self.assertFalse(result.get_solved())
         self.assertEqual(2, result.get_strike())
         self.assertEqual(0, result.get_ball())
+
+    def test_return_proper_value_if_0_strike_2_ball(self):
+        self.sut.set_question("123")
+        result: GameResult = self.sut.guess("312")
+
+        self.assertIsNotNone(result)
+        self.assertFalse(result.get_solved())
+        self.assertEqual(0, result.get_strike())
+        self.assertEqual(3, result.get_ball())
