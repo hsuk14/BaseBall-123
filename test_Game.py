@@ -1,6 +1,7 @@
 from unittest import TestCase
 
 from Game import Game
+from GameResult import GameResult
 
 
 class TestGame(TestCase):
@@ -21,3 +22,11 @@ class TestGame(TestCase):
         self.assert_illegal_arg("abc", "Arg must be 3 different digits")
         self.assert_illegal_arg("121", "Arg must be 3 different digits")
 
+    def test_return_solve_result_if_correct(self):
+        self.sut.question = "123"
+        result: GameResult = self.sut.guess("123")
+
+        self.assertIsNotNone(result)
+        self.assertTrue(result.solved)
+        self.assertEqual(3, result.strike)
+        self.assertEqual(0, result.ball)
